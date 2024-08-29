@@ -29,7 +29,9 @@ app.get("/biblioteca", async function(req, res){
     // clubeDeLeitura()
 }) */
 
-
+app.get("/", (req, res) => {
+  res.send("API  rodando ...");
+});
 app.listen(8080, () => {
   console.log("Servidor rodando na porta 8080");
 });
