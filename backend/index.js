@@ -2,7 +2,7 @@ import express from "express";
 import { lendoLivro } from "./routes/biblioteca.js";
 import { rotaUsuario } from "./routes/user.js";
 import { clubeDeLeitura } from "./routes/clubeDoLivro.js";
-
+const port = process.env.PORT || 8080;
 const app = express();
 
 app.get("/usuario", async function(req, res){
