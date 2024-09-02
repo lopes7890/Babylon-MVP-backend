@@ -1,9 +1,12 @@
 import express from "express";
 import { lendoLivro } from "./routes/biblioteca.js";
-import { rotaUsuario } from "./routes/user.js";
+import { rotaUsuario } from "./routes/usuarios/user.js";
 import { clubeDeLeitura } from "./routes/clubeDoLivro.js";
+import { db } from "./db.js";
+import { Postusuarios } from "./routes/usuarios/usuariosPost.js";
 const port = process.env.PORT || 8080;
 const app = express();
+app.use(express.json());
 
 app.get("/usuario", async function(req, res){
     try{
@@ -14,6 +17,15 @@ app.get("/usuario", async function(req, res){
     }
     
 })
+
+app.post("/usuario", async function(req, res){
+    try{
+        const postUser = await Postusuarios(req)
+        res.send(postUser)
+    } catch {
+        res.status(500).send("Não foi possivel estabelecer uma conexão");
+    }
+});
 
 app.get("/biblioteca", async function(req, res){
     try{
