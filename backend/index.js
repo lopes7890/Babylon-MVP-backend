@@ -1,14 +1,16 @@
 import express from "express";
+import cors from "cors";
 import { lendoLivro } from "./routes/biblioteca.js";
 import { rotaUsuario } from "./routes/usuarios/user.js";
-import { clubeDeLeitura } from "./routes/clubeDoLivro.js";
-import { db } from "./db.js";
+import { getClube } from "./routes/clubeDoLivro.js";
 import { Postusuarios } from "./routes/usuarios/usuariosPost.js";
 const port = process.env.PORT || 8080;
 const app = express();
+const acess = cors()
 app.use(express.json());
+app.use(acess());
 
-app.get("/usuario", async function(req, res){
+app.get("/usuario", acess(), async function(req, res){
     try{
         const resultUser = await rotaUsuario();
         res.json(resultUser);
@@ -18,7 +20,7 @@ app.get("/usuario", async function(req, res){
     
 })
 
-app.post("/usuario", async function(req, res){
+app.post("/usuario", acess(), async function(req, res){
     try{
         const postUser = await Postusuarios(req)
         res.send(postUser)
@@ -27,7 +29,7 @@ app.post("/usuario", async function(req, res){
     }
 });
 
-app.get("/biblioteca", async function(req, res){
+app.get("/biblioteca", acess(), async function(req, res){
     try{
         const resultBiblioteca = await lendoLivro();
         res.json(resultBiblioteca);
@@ -36,14 +38,18 @@ app.get("/biblioteca", async function(req, res){
     }
 })
 
-// Tabela não está pronta
-/* app.get("/clube", function(req, res){
-    // clubeDeLeitura()
-}) */
+app.get("/clube", acess(), async function(req, res){
+    try{
+        const resultClube = await getClube();
+        res.json(resultClube)
+    } catch{
+        res.status(500).send("Não foi possivel estabelecer uma conexão");
+    }
+})
 
-app.get("/", (req, res) => {
+app.get("/", acess(), (req, res) => {
   res.send("API  rodando ...");
 });
-app.listen(8080, () => {
+app.listen(port, () => {
   console.log("Servidor rodando na porta 8080");
 });
