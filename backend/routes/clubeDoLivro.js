@@ -1,10 +1,12 @@
 import { db } from "../db.js";
 
-export const clubeDeLeitura = () => {
-    db.query('SELECT * FROM clube', (err, results) => { 
-        if (err) {
-            console.error('Erro na consulta:', err.stack);
-            return;
-        }
-        console.log('Resultados da consulta:', results);
-  })};
+export const getClube = async () => {
+    try{
+        const [resultTableClube] = await db.query('SELECT * FROM usuario');
+        console.log('Resultados da consulta:', resultTableClube);
+        return resultTableClube;
+    } catch (err){ 
+          console.error('Erro na consulta:', err.stack);
+          return;
+    }
+};
