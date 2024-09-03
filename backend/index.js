@@ -6,11 +6,10 @@ import { getClube } from "./routes/clubeDoLivro.js";
 import { Postusuarios } from "./routes/usuarios/usuariosPost.js";
 const port = process.env.PORT || 8080;
 const app = express();
-const acess = cors()
 app.use(express.json());
-app.use(acess());
+app.use(cors());
 
-app.get("/usuario", acess(), async function(req, res){
+app.get("/usuario", async function(req, res){
     try{
         const resultUser = await rotaUsuario();
         res.json(resultUser);
@@ -20,7 +19,7 @@ app.get("/usuario", acess(), async function(req, res){
     
 })
 
-app.post("/usuario", acess(), async function(req, res){
+app.post("/usuario", async function(req, res){
     try{
         const postUser = await Postusuarios(req)
         res.send(postUser)
@@ -29,7 +28,7 @@ app.post("/usuario", acess(), async function(req, res){
     }
 });
 
-app.get("/biblioteca", acess(), async function(req, res){
+app.get("/biblioteca", async function(req, res){
     try{
         const resultBiblioteca = await lendoLivro();
         res.json(resultBiblioteca);
@@ -38,7 +37,7 @@ app.get("/biblioteca", acess(), async function(req, res){
     }
 })
 
-app.get("/clube", acess(), async function(req, res){
+app.get("/clube", async function(req, res){
     try{
         const resultClube = await getClube();
         res.json(resultClube)
@@ -47,7 +46,7 @@ app.get("/clube", acess(), async function(req, res){
     }
 })
 
-app.get("/", acess(), (req, res) => {
+app.get("/", (req, res) => {
   res.send("API  rodando ...");
 });
 app.listen(port, () => {
