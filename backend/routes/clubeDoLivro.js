@@ -2,7 +2,7 @@ import { db } from "../db.js";
 
 export const getClube = async () => {
     try{
-        const [resultTableClube] = await db.query('SELECT * FROM usuario');
+        const [resultTableClube] = await db.query('SELECT * FROM ClubeLivro');
         console.log('Resultados da consulta:', resultTableClube);
         return resultTableClube;
     } catch (err){ 
