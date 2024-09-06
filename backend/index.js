@@ -21,8 +21,7 @@ app.get("/usuario", async function(req, res){
 
 app.post("/usuario", async function(req, res){
     try{
-        const postUser = await Postusuarios(req)
-        res.send(postUser)
+        await Postusuarios(req, res)
     } catch {
         res.status(500).send("Não foi possivel estabelecer uma conexão");
     }
@@ -32,8 +31,8 @@ app.get("/biblioteca", async function(req, res){
     try{
         const resultBiblioteca = await lendoLivro();
         res.json(resultBiblioteca);
-    } catch {
-        res.status(500).send("Não foi possivel estabelecer uma conexão");
+    } catch (error) {
+        res.status(500).send("Não foi possivel estabelecer uma conexão", error);
     }
 })
 
