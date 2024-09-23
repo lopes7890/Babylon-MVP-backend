@@ -1,8 +1,9 @@
 import express from "express";
 import cors from "cors";
+import "dotenv/config";
 import { lendoLivro } from "./routes/biblioteca/biblioteca.js";
 import { postBiblioteca } from "./routes/biblioteca/bibliotecaPost.js";
-import { rotaUsuario } from "./routes/usuarios/user.js";
+//import { rotaUsuario } from "./routes/usuarios/user.js";
 import { getClube } from "./routes/clube/clubeDoLivro.js";
 import { Postusuarios } from "./routes/usuarios/usuariosPost.js";
 import { clubeDoLivroPost } from "./routes/clube/clubeDoLivroPost.js";
@@ -38,7 +39,7 @@ app.post("/usuario", async function(req, res){
     }
 });
 
-/* app.get("/biblioteca", async function(req, res){
+app.get("/biblioteca", async function(req, res){
     try{
         const resultBiblioteca = await lendoLivro();
         res.json(resultBiblioteca);
@@ -51,9 +52,9 @@ app.post("/biblioteca", async function(req, res){
     try{
         await postBiblioteca(req, res)
     } catch {
-
+        res.status(500).send("Não foi possivel estabelecer uma conexão", error);
     }
-}) */
+}) 
 
 app.get("/clube", async function(req, res){
     try{
