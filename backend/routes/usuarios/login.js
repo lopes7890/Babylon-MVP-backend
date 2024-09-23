@@ -38,7 +38,7 @@ export const loginUsers = async (req, res) => {
                     return res.status(401).json("Senha incorreta");
                 }
 
-                const token = jwt.sign({ id: user.id }, process.env.chave, { expiresIn: '1h' });
+                const token = jwt.sign({ id: user.id }, 'secret', { expiresIn: '1h' });
 
                 console.log("Usuário autenticado com sucesso");
                 res.status(200).json({ token });

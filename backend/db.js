@@ -2,14 +2,14 @@ import mysql from "mysql2";
 import "dotenv/config";
 
 const pool = mysql.createPool({ // autenticação no Banco de Dados
-    host: process.env.host,
-    user: process.env.user,
-    password: process.env.password,
-    database: process.env.database,
-    port: process.env.port,
-    waitForConnections: process.env.waitForConnections,
-    connectionLimit: process.env.connectionLimit,
-    queueLimit: process.env.queueLimit
+    host: "autorack.proxy.rlwy.net", //process.env.host,
+    user: "root", //process.env.user,
+    password: "whHBgILmXRFpeOCxZgTUUiiDuxNFliRw", //process.env.password,
+    database: "railway", //process.env.database,
+    port: "15245", //process.env.port,
+    waitForConnections: true, //process.env.waitForConnections,
+    connectionLimit: 10, //process.env.connectionLimit,
+    queueLimit: 0 //process.env.queueLimit
 })
 
 pool.getConnection((err, connection) => { // Verificação de conexão
