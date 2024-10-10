@@ -1,9 +1,9 @@
 import { db } from "../../db.js";
 import bcrypt from "bcryptjs";
 
-export const Postusuarios = async (req, res) => {
+export const Postusers = async (req, res) => {
   try {
-    const { nome, gmail, telefone, senha, idade, genero } = req.body;
+    const { name, gmail, phone, password, age, gender } = req.body;
     const saltRounds = 10;
 
     
@@ -18,7 +18,7 @@ export const Postusuarios = async (req, res) => {
       
       await db.query(
         'INSERT INTO usuario (nome, gmail, telefone, senha, idade, genero) VALUES (?, ?, ?, ?, ?, ?)',
-        [nome, gmail, telefone, hash, idade, genero] 
+        [name, gmail, phone, hash, password, age, gender] 
       );
       
       res.status(200).json({ message: "Usuário inserido com sucesso!" });

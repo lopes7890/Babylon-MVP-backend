@@ -1,8 +1,9 @@
 import fetch from 'node-fetch'; 
 
-export async function getBooks(titulo) {
-  let query = titulo
+export async function getBooks(title) {
+  let query = title
   const url = `https://gutendex.com/books?search=${query}`;
+
   try {
     const response = await fetch(url);
     const data = await response.json();
@@ -15,10 +16,10 @@ export async function getBooks(titulo) {
     // retornar apenas as informações necessárias
     const formattedBooks = data.results.map(book => {
       return {
-        titulo: book.title,
-        autor: book.authors.map(a => a.name).join(', '),
-        livro: book.formats['text/html'] || 'Link não disponível',
-        capa: book.formats['image/jpeg'] || 'Link nao disponível'
+        title: book.title,
+        author: book.authors.map(a => a.name).join(', '),
+        book: book.formats['text/html'] || 'Link não disponível',
+        view: book.formats['image/jpeg'] || 'Link nao disponível'
       };
     });
 

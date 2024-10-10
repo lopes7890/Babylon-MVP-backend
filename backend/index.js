@@ -1,14 +1,15 @@
 import express from "express";
 import cors from "cors";
 import "dotenv/config";
-import { getBooks } from "./routes/livro/livrosApi.js";
-import { lendoLivro } from "./routes/biblioteca/biblioteca.js";
-import { postBiblioteca } from "./routes/biblioteca/bibliotecaPost.js";
+import { getBooks } from "./routes/books/booksApi.js";
+import { getRandomBooks } from "./routes/books/homeBooksAPI.js";
+import { readingBook } from "./routes/library/library.js";
+import { postlibrary } from "./routes/library/libraryPost.js";
 //import { rotaUsuario } from "./routes/usuarios/user.js";
-import { getClube } from "./routes/clube/clubeDoLivro.js";
-import { Postusuarios } from "./routes/usuarios/usuariosPost.js";
-import { clubeDoLivroPost } from "./routes/clube/clubeDoLivroPost.js";
-import { loginUsers } from "./routes/usuarios/login.js";
+import { getClub } from "./routes/club/bookClube.js";
+import { Postusers } from "./routes/users/usersPost.js";
+import { bookClubPost } from "./routes/club/bookClubePost.js";
+import { loginUsers } from "./routes/users/login.js";
 const port = process.env.PORT || 8080;
 const app = express();
 app.use(express.json());
@@ -32,59 +33,66 @@ app.post("/login", async function(req, res) {
     
 }) */
 
-app.post("/usuario", async function(req, res){
+app.post("/user", async function(req, res){
     try{
-        await Postusuarios(req, res);
+        await Postusers(req, res);
     } catch (error) {
         res.status(500).send("Não foi possivel estabelecer uma conexão", error);
     }
 });
 
-app.get("/biblioteca", async function(req, res){
+app.get("/library", async function(req, res){
     try{
-        const resultBiblioteca = await lendoLivro();
-        res.json(resultBiblioteca);
+        const resultLibrary = await readingBook();
+        res.json(resultLibrary);
     } catch (error) {
         res.status(500).send("Não foi possivel estabelecer uma conexão", error);
     }
 })
 
-app.post("/biblioteca", async function(req, res){
+app.post("/library", async function(req, res){
     try{
-        await postBiblioteca(req, res)
+        await postlibrary(req, res)
     } catch (error) {
         res.status(500).send("Não foi possivel estabelecer uma conexão", error);
     }
 }) 
 
-app.get("/clube", async function(req, res){
+app.get("/club", async function(req, res){
     try{
-        const resultClube = await getClube();
-        res.json(resultClube)
+        const resultClub = await getClub();
+        res.json(resultClub)
     } catch (error){
         res.status(500).send("Não foi possivel estabelecer uma conexão", error);
     }
 })
 
-app.post("/clube", async function(req, res){
+app.post("/club", async function(req, res){
     try{
-        await clubeDoLivroPost(req, res);
+        await bookClubPost(req, res);
     } catch (error){
         res.status(500).send("Não foi possivel estabelecer uma conexão", error);
     }
 })
 
-app.get("/livro/:titulo", async function(req, res) {
+app.get("/book/:title", async function(req, res) {
     try{
-        await getBooks(req.params.titulo);
+        const getBookSarche = await getBooks(req.params.titulo);
+        res.json(getBookSarche)
     } catch (error){
         res.status(500).send("Não foi possivel estabelecer uma conexão", error);
     }
 })
 
-app.get("/", (req, res) => {
-  res.send("API  rodando ...");
-});
+app.get("/home", async function(req, res) {
+    try{
+        const getBookRandom = await getRandomBooks();
+        res.json(getBookRandom)
+    } catch (error){
+        res.status(500).send("Não foi possivel estabelecer uma conexão", error);
+    }
+})
+
 app.listen(port, () => {
   console.log("Servidor rodando na porta 8080");
 });
