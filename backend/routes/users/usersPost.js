@@ -18,7 +18,7 @@ export const Postusers = async (req, res) => {
       
       await db.query(
         'INSERT INTO usuario (nome, gmail, telefone, senha, idade, genero) VALUES (?, ?, ?, ?, ?, ?)',
-        [name, gmail, phone, hash, password, age, gender] 
+        [name, gmail, phone, hash, age, gender] 
       );
       
      return res.status(200).json({ message: "Usuário inserido com sucesso!" });
