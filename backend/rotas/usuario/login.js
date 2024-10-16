@@ -3,7 +3,7 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import "dotenv/config";
 
-export const loginUsers = async (req, res) => {
+export const loginUsuarios = async (req, res) => {
     try {
         console.log("Entrou na função login");
 

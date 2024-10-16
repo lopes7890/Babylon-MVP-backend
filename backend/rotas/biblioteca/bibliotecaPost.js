@@ -1,10 +1,10 @@
 import { db } from "../../db.js";
 
-export const postlibrary = async (req, res) => {
+export const postBiblioteca = async (req, res) => {
     try{
-        const {name, nameAuthor, subject, idBook, image, book} = req.body
+        const {nome, nomeAutor, assunto, idLivro, imagem, livro} = req.body
             db.query("INSERT INTO Livros (nome, nomeAutor, assunto, idLivro, imagem, livro) VALUES (?, ?, ?, ?, ?, ?)",
-                [name, nameAuthor, subject, idBook, image, book]
+                [nome, nomeAutor, assunto, idLivro, imagem, livro]
             );
             return res.status(200).json({message: "Livro inserido com sucesso!"})
     } catch (err){
