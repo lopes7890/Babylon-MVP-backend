@@ -41,11 +41,11 @@ export const loginUsers = async (req, res) => {
                 const token = jwt.sign({ id: user.id }, 'secret', { expiresIn: '1h' });
 
                 console.log("Usuário autenticado com sucesso");
-                res.status(200).json({ token });
+               return res.status(200).json({ token });
             });
         });
     } catch (err) {
         console.error("Erro na execução do código:", err);
-        res.status(500).json({ message: "Erro no servidor" });
+       return res.status(500).json({ message: "Erro no servidor" });
     }
 };
