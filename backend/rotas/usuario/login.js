@@ -4,48 +4,44 @@ import jwt from "jsonwebtoken";
 import "dotenv/config";
 
 export const loginUsuarios = async (req, res) => {
-    try {
+
+    try{
         console.log("Entrou na função login");
 
         const { gmail, senha } = req.body;
 
-        if (!gmail || !senha) {
+        if(!gmail || !senha){
             console.log("Dados de login inválidos");
-            return res.status(400).json("Por favor, forneça gmail e senha.");
+            return res.status(400).json("Por favor, insira gmail e senha.");
+
+        }
+        
+        // recuperando dados do db
+        const [resultados] = await db.query("SELECT * FROM usuario WHERE gmail = ?", [gmail]);
+        
+        if(resultados.length === 0){
+            console.log("Usuário não encontrado");
+            return res.status(401).json("Usuário não encontrado");
         }
 
-        db.query("SELECT * FROM usuario WHERE gmail = ?", [gmail], (err, results) => {
-            if (err) {
-                console.log("Erro na consulta ao banco de dados", err);
-                return res.status(500).send("Erro no servidor");
-            }
+        const user = resultados[0];
 
-            if (results.length === 0) {
-                console.log("Usuário não encontrado");
-                return res.status(401).json("Usuário não encontrado");
-            }
+        // comparando senha com sua versão criptografada
+        const isMatch = await bcrypt.compare(senha, user.senha);
 
-            const user = results[0];  
+        if(!isMatch){
+            console.log("Senha incorreta");
+            return res.status(401).json("Senha incorreta!");
+        }
 
-            bcrypt.compare(senha, user.senha, (err, isMatch) => {
-                if (err) {
-                    console.log("Erro ao comparar senhas", err);
-                    return res.status(500).send("Erro ao comparar as senhas");
-                }
+        // gerando token de acesso
+        const token = jwt.sign({ id: user.id }, 'secret', { expiresIn: '1h' });
 
-                if (!isMatch) {
-                    console.log("Senha incorreta");
-                    return res.status(401).json("Senha incorreta");
-                }
-
-                const token = jwt.sign({ id: user.id }, 'secret', { expiresIn: '1h' });
-
-                console.log("Usuário autenticado com sucesso");
-               return res.status(200).json({ token });
-            });
-        });
+        console.log("Usuário autenticado com sucesso");
+        return res.status(200).json({ token })
+    
     } catch (err) {
         console.error("Erro na execução do código:", err);
-       return res.status(500).json({ message: "Erro no servidor" });
+        return res.status(500).json({ messagem: "Erro no servidor" })
     }
-};
+}
