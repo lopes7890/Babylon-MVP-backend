@@ -7,7 +7,7 @@ export const Postusers = async (req, res) => {
     const saltRounds = 10;
 
     
-    bcrypt.hash(senha, saltRounds, async (err, hash) => {
+    bcrypt.hash(password, saltRounds, async (err, hash) => {
       if (err) {
         console.error(err);
         return res.status(500).json({ message: "Erro ao criptografar a senha" });
