@@ -6,7 +6,7 @@ export const postUsuario = async (req, res) => {
     const { nome, gmail, telefone, senha, idade, genero } = req.body;
     const saltRounds = 10;
 
-    const hash = await bcrypt.hash(password, saltRounds);
+    const hash = await bcrypt.hash(senha, saltRounds);
 
     console.log('Senha criptografada:', hash);
 
