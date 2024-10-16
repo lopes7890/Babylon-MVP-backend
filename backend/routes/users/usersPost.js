@@ -21,10 +21,10 @@ export const Postusers = async (req, res) => {
         [name, gmail, phone, hash, password, age, gender] 
       );
       
-      res.status(200).json({ message: "Usuário inserido com sucesso!" });
+     return res.status(200).json({ message: "Usuário inserido com sucesso!" });
     });
   } catch (err) {
     console.log("Erro:", err);
-    res.status(500).json({ message: "Erro ao inserir usuário" });
+   return res.status(500).json({ message: "Erro ao inserir usuário" });
   }
 };
