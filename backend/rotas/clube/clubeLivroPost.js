@@ -3,7 +3,7 @@ import { db } from "../../db.js";
 export const postClubeLivro = async (req, res) => {
     try{
         const {nomeClub, foto_club, link_club} = req.body;
-        await db.query('INSERT INTO ClubeLivro (nomeClub, foto_club, link_club) VALUES (?, ?, ?)', 
+        await db.query('INSERT INTO clubelivro (nomeClub, foto_club, link_club) VALUES (?, ?, ?)', 
         [nomeClub, foto_club, link_club]);
         res.status(200).json({ message: "Clube inserido com sucesso!" });
     } catch (err){

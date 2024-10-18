@@ -3,7 +3,7 @@ import { db } from "../../db.js";
 
 export const lendoLivro = async () => {
     try{
-        const [resultadoTabelaBiblioteca] = await db.query('SELECT * FROM Livros'); 
+        const [resultadoTabelaBiblioteca] = await db.query('SELECT * FROM livros'); 
         console.log('Resultados obtidos: ', resultadoTabelaBiblioteca);
         return resultadoTabelaBiblioteca;   
     } catch (err){

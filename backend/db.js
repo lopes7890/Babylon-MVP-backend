@@ -2,11 +2,11 @@ import mysql from "mysql2";
 import "dotenv/config";
 
 const pool = mysql.createPool({ // autenticação no Banco de Dados
-    host: "autorack.proxy.rlwy.net", //process.env.host,
+    host: "junction.proxy.rlwy.net", //process.env.host,
     user: "root", //process.env.user,
-    password: "whHBgILmXRFpeOCxZgTUUiiDuxNFliRw", //process.env.password,
+    password: "XCLNpWJZYPdpbJlFYhaEPDQzCAuXJPjO", //process.env.password,
     database: "railway", //process.env.database,
-    port: "15245", //process.env.port,
+    port: "16064", //process.env.port,
     waitForConnections: true, //process.env.waitForConnections,
     connectionLimit: 10, //process.env.connectionLimit,
     queueLimit: 0 //process.env.queueLimit
