@@ -4,6 +4,13 @@ import bcrypt from "bcryptjs";
 export const postUsuario = async (req, res) => {
   try {
     const { nome, gmail, telefone, senha, idade, genero } = req.body;
+
+    const [verifica] = await db.query("SELECT * FROM usuario WHERE gmail = ? OR telefone = ?", [gmail, telefone])
+
+    if (verifica.length === 1){
+      return res.status(400).json({message: "Usuário ja existe"})
+    }
+    
     const saltRounds = 10;
 
     const hash = await bcrypt.hash(senha, saltRounds);

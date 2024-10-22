@@ -8,7 +8,7 @@ import { getClube } from "./rotas/clube/clubeLivro.js";
 import { postUsuario } from "./rotas/usuario/usuarioPost.js";
 import { postClubeLivro } from "./rotas/clube/clubeLivroPost.js";
 import { loginUsuarios } from "./rotas/usuario/login.js";
-const port = 3000//process.env.PORT || 8080;
+const port = process.env.PORT || 8080;
 const app = express();
 app.use(express.json());
 app.use(cors());
