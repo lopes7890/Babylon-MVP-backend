@@ -36,10 +36,13 @@ export const loginUsuarios = async (req, res) => {
 
         // gerando token de acesso
         const usuario = user.nome
-        const token = jwt.sign({ id: user.id }, 'secret', { expiresIn: '1h' });
-
+        const token = jwt.sign({ id: user.idUsuario }, 'secret', { expiresIn: '1h' });
+        console.log(token)
+        const id = user.idUsuario
+        
+        console.log(user.idUsuario)
         console.log("Usuário autenticado com sucesso");
-        return res.status(200).json({ token, usuario })
+        return res.status(200).json({ token, usuario, id })
     
     } catch (err) {
         console.error("Erro na execução do código:", err);

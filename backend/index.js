@@ -8,6 +8,7 @@ import { getClube } from './rotas/clube/clubeLivro.js';
 import { postUsuario } from './rotas/usuario/usuarioPost.js';
 import { postClubeLivro } from './rotas/clube/clubeLivroPost.js';
 import { loginUsuarios } from './rotas/usuario/login.js';
+import { autenticarToken } from './rotas/autenticacao/auntenticado.js';
 const port = process.env.PORT || 8080;
 const app = express();
 app.use(cors());
@@ -29,9 +30,11 @@ app.post('/usuario', async function (req, res) {
   }
 });
 
-app.get('/biblioteca', async function (req, res) {
+app.get('/biblioteca', autenticarToken, async function (req, res) {
   try {
-    const resultadoBiblioteca = await lendoLivro();
+    const idUsuario = req.idUsuario;
+    console.log(idUsuario)
+    const resultadoBiblioteca = await lendoLivro(idUsuario);
     res.json(resultadoBiblioteca);
   } catch (error) {
     res.status(500).send('Não foi possivel estabelecer uma conexão', error);

@@ -1,9 +1,8 @@
 import { db } from "../../db.js";
 
-
-export const lendoLivro = async () => {
+export const lendoLivro = async (id) => {
     try{
-        const [resultadoTabelaBiblioteca] = await db.query('SELECT * FROM livros'); 
+        const [resultadoTabelaBiblioteca] = await db.query("SELECT * FROM livros WHERE fk_usuario = ?", [id]); 
         console.log('Resultados obtidos: ', resultadoTabelaBiblioteca);
         return resultadoTabelaBiblioteca;   
     } catch (err){
