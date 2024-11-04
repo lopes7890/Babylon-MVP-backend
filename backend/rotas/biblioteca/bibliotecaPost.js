@@ -2,9 +2,9 @@ import { db } from "../../db.js";
 
 export const postBiblioteca = async (req, res) => {
     try{
-        const {nome, nomeAutor, assunto, idLivro, imagem, livro, fk_usuario} = req.body
-            db.query("INSERT INTO livros (nome, nomeAutor, assunto, idLivro, imagem, livro, fk_usuario) VALUES (?, ?, ?, ?, ?, ?, ?)",
-                [nome, nomeAutor, assunto, idLivro, imagem, livro, fk_usuario]
+        const { title, authors,	subjects, idLivro, livro, imagem, fk_usuario, translators,	bookshelves, languages,	media_type,	formats, download_count, copyright } = req.body
+            db.query("INSERT INTO livros (title, authors, subjects,	idLivro, livro,	imagem,	fk_usuario,	translators, bookshelves, languages, media_type, formats, download_count, copyright) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                [title, authors,	subjects, idLivro, livro, imagem, fk_usuario, translators,	bookshelves, languages,	media_type,	formats, download_count, copyright]
             );
             return res.status(200).json({message: "Livro inserido com sucesso!"})
     } catch (err){
