@@ -9,7 +9,7 @@ import { postUsuario } from './rotas/usuario/usuarioPost.js';
 import { postClubeLivro } from './rotas/clube/clubeLivroPost.js';
 import { loginUsuarios } from './rotas/usuario/login.js';
 import { autenticarToken } from './rotas/autenticacao/auntenticado.js';
-const port = process.env.PORT || 8080;
+const port = 3000 //process.env.PORT || 8080;
 const app = express();
 app.use(cors());
 app.use(express.json());
@@ -41,9 +41,10 @@ app.get('/biblioteca', autenticarToken, async function (req, res) {
   }
 });
 
-app.post('/biblioteca', async function (req, res) {
+app.post('/biblioteca', autenticarToken, async function (req, res) {
   try {
-    await postBiblioteca(req, res);
+    const idUsuario = req.idUsuario
+    await postBiblioteca(req, res, idUsuario);
   } catch (error) {
     res.status(500).send('Não foi possivel estabelecer uma conexão', error);
   }
