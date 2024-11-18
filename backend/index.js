@@ -9,7 +9,7 @@ import { postUsuario } from './rotas/usuario/usuarioPost.js';
 import { postClubeLivro } from './rotas/clube/clubeLivroPost.js';
 import { loginUsuarios } from './rotas/usuario/login.js';
 import { autenticarToken } from './rotas/autenticacao/auntenticado.js';
-const port = 3000 //process.env.PORT || 8080;
+const port = 3000; //process.env.PORT || 8080;
 const app = express();
 app.use(cors());
 app.use(express.json());
@@ -33,7 +33,7 @@ app.post('/usuario', async function (req, res) {
 app.get('/biblioteca', autenticarToken, async function (req, res) {
   try {
     const idUsuario = req.idUsuario;
-    console.log(idUsuario)
+    console.log(idUsuario);
     const resultadoBiblioteca = await lendoLivro(idUsuario);
     res.json(resultadoBiblioteca);
   } catch (error) {
@@ -43,7 +43,8 @@ app.get('/biblioteca', autenticarToken, async function (req, res) {
 
 app.post('/biblioteca', autenticarToken, async function (req, res) {
   try {
-    const idUsuario = req.idUsuario
+    const idUsuario = req.idUsuario;
+    console.log(idUsuario);
     await postBiblioteca(req, res, idUsuario);
   } catch (error) {
     res.status(500).send('Não foi possivel estabelecer uma conexão', error);
