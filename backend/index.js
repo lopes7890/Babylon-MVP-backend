@@ -12,7 +12,7 @@ import { postClubeLivro } from './rotas/clube/clubeLivroPost.js';
 import { loginUsuarios } from './rotas/usuario/login.js';
 import { autenticarToken } from './rotas/autenticacao/auntenticado.js';
 import { imagemUsuario } from './rotas/usuario/imagem.js';
-const port = process.env.PORT || 8080;
+const port = 3000 //process.env.PORT || 8080;
 const app = express();
 app.use(cors());
 app.use(express.json());
