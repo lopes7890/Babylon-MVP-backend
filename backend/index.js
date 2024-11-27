@@ -16,6 +16,7 @@ const port = 3000 //process.env.PORT || 8080;
 const app = express();
 app.use(cors());
 app.use(express.json());
+app.use(upload.single('file'));
 
 app.post('/login', async function (req, res) {
   try {
