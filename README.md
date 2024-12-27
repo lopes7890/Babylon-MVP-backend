@@ -13,6 +13,7 @@ O ***Projeto Babylon*** tem como objetivo criar um ambiente interativo para leit
 * [Multer](https://www.npmjs.com/package/multer)
 * [Bcrypt](https://www.npmjs.com/package/bcrypt)
 * [MySQL](https://mysql.com/)
+* E outras
 
 ## 🤝 Como contribuir:
 
