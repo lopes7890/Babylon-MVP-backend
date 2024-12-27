@@ -22,6 +22,3 @@ pool.getConnection((err, connection) => { // Verificação de conexão
 });
 
 export const db = pool.promise()
-
-
-
